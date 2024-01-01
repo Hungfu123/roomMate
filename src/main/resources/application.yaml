@@ -10,7 +10,7 @@ spring:
           github:
             client-id: ${CLIENT_ID}
             client-secret: ${CLIENT_SECRET}
-            scope: read:public_repo
+#            scope: read:public_repo
 
   user:
     name: test
