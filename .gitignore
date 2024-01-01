@@ -1,0 +1,10 @@
+# .gitignore
+
+# Ignoriere das .gradle-Verzeichnis
+.gradle/
+
+# Ignoriere das build-Verzeichnis
+build/
+
+# Ignoriere das .idea-Verzeichnis
+.idea/
