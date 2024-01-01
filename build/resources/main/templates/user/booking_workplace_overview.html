@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{user/header :: header}"></div>
+<body>
+<div th:replace="~{user/header :: navbar}"></div>
+<div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+    <div class="progress-bar" style="width: 75%"></div>
+</div>
+<!--<div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px">-->
+<!--    <div class="progress-bar" style="width: 75%"></div>-->
+<!--</div>-->
+<div class="container pt-3">
+    <h1 class="text-center">
+        Auswahl Übersicht
+    </h1>
+    <p class="lead text-center">
+        Wählen Sie einen Arbeitsplatz aus
+    </p>
+    <div th:replace="~{user/breadcrumb :: breadcrumbSelection}"></div>
+
+    <div id="links" th:if="${workplaces}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>ID</th>
+<!--                <th>Raum ID</th>-->
+                <th>Ausstattung</th>
+                <th>Verfügbarkeit</th>
+                <th>Aktion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="workplace, workplaceStat : ${workplaces}">
+                <td  th:text="${workplaceStat.count}">1</td>
+                <td>
+                    <span th:text="${workplace.id}"></span>
+                </td>
+<!--                <td><span th:text="${workplace.roomId}"></span></td>-->
+                <td>
+                    <span th:text="${workplace.equipments}"></span>
+                </td>
+                <td th:text="${workplaceAvailabilityList[workplaceStat.index] ? 'Verfügbar' : 'Nicht verfügbar'}"></td>
+
+                <td>
+                    <form th:action="@{/booking/search/overview/room/workplace/summary}">
+                        <input type="hidden" th:name="workplaceId" th:value="${workplace.id}"/>
+                        <button type="submit" class="btn btn-dark"
+                                th:disabled="${!workplaceAvailabilityList[workplaceStat.index]}">Auswählen
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

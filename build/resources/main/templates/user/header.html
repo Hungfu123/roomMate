@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="header">
+  <meta charset="UTF-8">
+  <title>RoomMate</title>
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet"
+        th:href="@{/css/bootstrap.min.css}">
+  <!-- Lade Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <!-- Lade Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <!-- Lade jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css">
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<!--  <h1>Willkommen bei RoomMate</h1>-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+  <a class="navbar-brand" style="padding-left: 25px" href="/">RoomMate</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/booking/search"> Arbeitsplätze Suchen</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/booking/mybookings">Reservierungen</a>
+      </li>
+      <li class="nav-item" sec:authorize="isAuthenticated() and hasRole('ADMIN')">
+        <a class="nav-link" th:href="@{/admin}">Admin</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/logout}">Abmelden</a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav flex-row flex-wrap ms-auto">
+      <li class="nav-item active me-5" th:if="${bookingDTO.userName}">
+        <strong th:text="${bookingDTO.userName}"></strong>
+      </li>
+    </ul>
+
+  </div>
+
+</nav>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{admin/header :: header}"></div>
+<body>
+<div th:replace="~{admin/header :: navbar}"></div>
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
+    <h1>Arbeitsplatz hinzufügen</h1>
+
+    <div class="row col-md-6 ">
+        <!--        <section class="mt-5">-->
+        <!--            <a th:href="@{/room/{roomId}(roomId=${roomId})}">Zur Raum Übersicht</a>-->
+        <!--        </section>-->
+
+        <form th:action="@{/admin/room/{roomId}/addworkplace(roomId=${roomId})}" method="post"
+              style="margin-top: 50px; border: 1px solid lightgray; padding: 40px 60px;">
+            <div class="form-group">
+                <label for="workPlaceName">Arbeitsplatz Name</label>
+                <input type="workPlaceName" class="form-control" id="workPlaceName" name="workPlaceName"
+                       placeholder="Namen eingeben">
+                <!--      <small class="form-text text-danger" th:if="${#fields.hasErrors('raumbuchung.datum')}" th:errors="*{raumbuchung.datum}">Ungültige Startzeit.</small>-->
+            </div>
+            <div class="form-group">
+                <label for="dateTimeFrom">Von</label>
+                <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
+                <input type="text" class="form-control datetimepicker" id="dateTimeFrom" name="dateTimeFrom" th:field="*{bookingDTO.dateTimeFrom}">
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.dateTimeFrom')}"
+                       th:errors="${bookingDTO.dateTimeFrom}"></small>
+            </div>
+            <div class="form-group">
+                <label for="dateTimeTo">Bis</label>
+                <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
+                <input type="text" class="form-control datetimepicker" id="dateTimeTo" name="dateTimeTo" th:field="*{bookingDTO.dateTimeTo}">
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.dateTimeTo')}"
+                       th:errors="${bookingDTO.dateTimeTo}"></small>
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO')}"
+                       th:errors="${bookingDTO}"></small>
+            </div>
+            <br>
+            <br>
+            <div class="d-grid gap-2">
+                <button type="submit" name="addWorkPlace" value="true" class="btn btn-secondary">Platz hinzufügen
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

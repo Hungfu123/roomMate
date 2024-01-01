@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<div th:replace="~{user/header :: header}"></div>
+<body>
+<div th:replace="~{user/header :: navbar}"></div>
+<div class="progress" role="progressbar" aria-label="Example 1px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+    <div class="progress-bar" style="width: 25%"></div>
+</div>
+<!--<div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="height: 20px">-->
+<!--    <div class="progress-bar" style="width: 25%"></div>-->
+<!--</div>-->
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
+    <h1>Arbeitsplatz suchen</h1>
+    <div class="row col-md-6">
+        <!--        Fehleranzeige-->
+        <div th:replace="~{user/breadcrumb :: breadcrumbSelection}"></div>
+        <form th:action="@{/booking/search/overview/room}"
+              style="margin-top: 50px; border: 1px solid lightgray; padding: 40px 60px;">
+            <div class="form-group">
+                <label for="dateTimeFrom">Von</label>
+                <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
+                <input type="text" class="form-control datetimepicker" id="dateTimeFrom" name="dateTimeFrom" th:field="*{bookingDTO.dateTimeFrom}">
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.dateTimeFrom')}"
+                       th:errors="${bookingDTO.dateTimeFrom}"></small>
+            </div>
+            <div class="form-group">
+                <label for="dateTimeTo">Bis</label>
+                <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
+                <input type="text" class="form-control datetimepicker" id="dateTimeTo" name="dateTimeTo" th:field="*{bookingDTO.dateTimeTo}">
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.dateTimeTo')}"
+                       th:errors="${bookingDTO.dateTimeTo}"></small>
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO')}"
+                       th:errors="${bookingDTO}"></small>
+            </div>
+            <br>
+            <!-- Weitere Formularfelder hier... -->
+            <div th:each="item : ${equipments}">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="equipment-${item}" name="equipments" th:value="${item}" th:field="*{bookingDTO.equipments}">
+                    <label class="form-check-label" for="equipment-${item}" th:text="${item.displayName}">Tastatur</label>
+                </div>
+            </div>
+            <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.equipments')}"
+                   th:errors="${bookingDTO.equipments}"></small>
+            <br>
+            <div class="d-grid gap-2">
+                <button type="submit" name="addWorkPlace" class="btn btn-secondary">Suchen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Hier füge das <script>-Element mit dem DateTimePicker-JavaScript-Code ein -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('.datetimepicker', {
+            enableTime: true,
+            dateFormat: 'd.m.Y H:i',
+            minuteIncrement: 15,
+        });
+    });
+</script>
+
+</body>
+</html>

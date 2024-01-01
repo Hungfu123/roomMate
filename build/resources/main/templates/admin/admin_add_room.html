@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{admin/header :: header}"></div>
+<body>
+<div th:replace="~{admin/header :: navbar}"></div>
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
+    <h1>Raum hinzufügen</h1>
+
+    <div class="row col-md-6 ">
+        <section class="mt-5">
+            <a href="/admin">Zur Übersicht</a>
+        </section>
+        <form th:action="@{/admin/addroom}" method="post"
+              style="margin-top: 50px; border: 1px solid lightgray; padding: 40px 60px;">
+            <div class="form-group">
+                <label for="roomName">Raumname</label>
+                <input type="roomName" class="form-control" id="roomName" name="roomName" placeholder="Namen eingeben">
+                <!--      <small class="form-text text-danger" th:if="${#fields.hasErrors('raumbuchung.datum')}" th:errors="*{raumbuchung.datum}">Ungültige Startzeit.</small>-->
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label for="workPlaceNumber">Anzahl der Arbeitsplätze</label>-->
+<!--                <input type="workPlaceNumber" class="form-control" id="workPlaceNumber" name="workPlaceNumber"-->
+<!--                       placeholder="Anzahl eingeben">-->
+<!--                &lt;!&ndash;      <small class="form-text text-danger" th:if="${#fields.hasErrors('raumbuchung.datum')}" th:errors="*{raumbuchung.datum}">Ungültige Startzeit.</small>&ndash;&gt;-->
+<!--            </div>-->
+            <br>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-secondary">Raum hinzufügen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

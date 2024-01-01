@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{admin/header :: header}"></div>
+<body>
+<div th:replace="~{admin/header :: navbar}"></div>
+<div class="container pt-3">
+    <h1 class="text-center">
+        Raum Übersicht
+    </h1>
+    <p class="lead text-center">
+        Beobachten Sie hier die Räume
+    </p>
+
+    <section class="mt-5">
+        <a href="/admin">Zur Übersicht</a>
+    </section>
+    <div id="links" th:if="${rooms}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Raumname</th>
+                <th>Anzahl der Arbeitsplätze</th>
+                <th>Aktion</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room, raumStat : ${rooms}">
+                <td  th:text="${raumStat.count}">1</td>
+                <td>
+                    <a th:text="*{room.roomName}" th:href="@{/room/{roomId}(roomId=*{room.getId()})}"></a>
+                </td>
+                <td><span th:text="${room.getWorkPlaces().size()}"></span></td>
+                <td>
+                    <form method="post" th:action="@{/room/{roomId}/delete(roomId=*{room.getId()})}">
+                        <input class="btn btn-outline-dark btn-sm" type="submit" value="Löschen">
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/admin/addroom}">
+            <button type="submit" class="btn btn-secondary">Raum hinzufügen</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{admin/header :: header}"></div>
+<body>
+<div th:replace="~{admin/header :: navbar}"></div>
+<div class="container pt-3">
+  <h1 class="text-center">
+  Raum <span th:text="${maybeRoom.roomName}"></span>
+  </h1>
+  <p class="lead text-center">
+    Raum ID: <u><span th:text="${maybeRoom.id}"> </span></u>
+    Beobachten Sie hier die Arbeitsplätze
+  </p>
+
+  <div id="links" th:if="${workPlaces}">
+    <section class="mt-5">
+      <a href="/admin">Zur Übersicht</a>
+    </section>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Arbeitsplatz</th>
+        <th>Ausstattungen</th>
+        <th>Aktionen</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="workplace, workStat : ${workPlaces}">
+        <td th:text="${workStat.count}">1</td>
+        <td>
+          <a th:text="*{workplace.id}" th:href="@{/admin/{workplaceId}(workplaceId=*{workplace.id})}"></a>
+        </td>
+        <td>
+          <span th:text="${workplace.equipments}"></span>
+<!--          <span th:each="equipment : ${workplace.equipments}" th:text="${equipment.displayName + ', '}"></span>        </td>-->
+        </td>
+<!--        <td><span th:text="${#temporals.format(workplace.dateTimeFrom, 'dd.MM.yyyy HH:mm')}"></span></td>-->
+<!--        <td><span th:text="${#temporals.format(workplace.dateTimeTo, 'dd.MM.yyyy HH:mm')}"></span></td>-->
+        <td>
+          <div class="btn-group">
+            <form method="post" th:action="@{/admin/room/{roomId}/{workplaceId}/delete(roomId=${maybeRoom.id}, workplaceId=*{workplace.id})}">
+              <input class="btn btn-outline-dark btn-sm" type="submit" value="Löschen">
+            </form>
+            <form method="get" th:action="@{/admin/room/{roomId}/{workplaceId}/block(roomId=${maybeRoom.id}, workplaceId=*{workplace.id})}">
+              <input class="btn btn-outline-dark btn-sm ml-2" type="submit" value="Sperren">
+            </form>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <form th:action="@{/admin/{roomId}/workplace(roomId=${maybeRoom.id})}" method="get">
+      <button type="submit" class="btn btn-secondary">Arbeitsplatz hinzufügen</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
