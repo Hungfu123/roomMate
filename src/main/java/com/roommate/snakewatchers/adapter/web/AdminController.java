@@ -32,7 +32,7 @@ public class AdminController {
     public RedirectView deleteRoom(@PathVariable Long roomId) {
         roomService.deleteRoom(roomId);
         // Redirect zu einer Seite, die die Raumübersicht anzeigt
-        return new RedirectView("/admin");
+        return new RedirectView("/admin/control");
     }
 
     @GetMapping("/admin/addroom")
@@ -44,7 +44,7 @@ public class AdminController {
     public RedirectView addRoom(RoomDTO room){
         roomService.addRoom(room);
         System.out.println(room);
-        return new RedirectView("/admin");
+        return new RedirectView("/admin/control");
     }
 
     //
