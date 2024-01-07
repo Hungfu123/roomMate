@@ -21,4 +21,12 @@ public interface BookingService {
     boolean checkDuplicate(BookingDTO booking);
 
     BookingDTO updateEqFromWorkPlace(BookingDTO booking, Set<Equipment> equipments);
+
+    List<BookingDTO> findBookingsByWorkPlaceId(Long workplaceId, BookingDTO bookingDTO);
+
+    BookingDTO findById(Long bookingId);
+
+    List<BookingDTO> findByUserName(String name);
+
+    void updateBookingWithRoom(Long roomID, BookingDTO booking);
 }
