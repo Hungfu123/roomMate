@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{admin/header :: header}"></div>
+<body>
+<div th:replace="~{admin/header :: navbar}"></div>
+<div class="container pt-3">
+
+<div  style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;" th:if="${bookings}">
+
+    <h2>Buchungsverwaltung </h2>
+    <section class="mt-5">
+        <a href="/admin">Zurück</a>
+    </section>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nr</th>
+            <th>Arbeitsplatz</th>
+            <th>User</th>
+            <th>Raum</th>
+            <th>Raum Name</th>
+            <th>Ausstattungen</th>
+            <th>Von</th>
+            <th>Bis</th>
+            <th>Aktionen</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.bookingID}"></td>
+            <td th:text="${booking.workplaceId}"></td>
+            <td th:text="${booking.userName}" ></td>
+            <td th:text="${booking.roomId}"></td>
+            <td th:text="${booking.roomName}"></td>
+            <td th:text="${booking.equipments}"></td>
+            <td th:text="${{booking.dateTimeFrom}}">
+            <td th:text="${{booking.dateTimeTo}}">
+            </td>
+            <td>
+                <div class="btn-group">
+                    <form method="post" th:action="@{/admin/management/{bookingId}/delete(bookingId=${booking.bookingID})}">
+                        <input class="btn btn-outline-dark btn-sm" type="submit" value="Stornieren">
+                    </form>
+                    <form th:action="@{/admin/management/{bookingId}/edit(bookingId=${booking.bookingID})}">
+                        <input class="btn btn-outline-dark btn-sm" type="submit" value="Bearbeiten">
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>
