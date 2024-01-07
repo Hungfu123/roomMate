@@ -25,11 +25,12 @@ public class AppUserService implements OAuth2UserService<OAuth2UserRequest, OAut
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        System.out.println("User Service called");
+        System.out.println("UserProfile Service called");
         OAuth2User originalUser = defaultService.loadUser(userRequest);
         Set<GrantedAuthority> authorities = new HashSet<>(originalUser.getAuthorities());
 
         var attributes = originalUser.getAttributes(); //keep existing attributes
+        System.out.println("USER ATTRIBUTES: " + attributes); // Ausgabe der Benutzerattribute
 
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
