@@ -1,8 +1,8 @@
 package com.roommate.snakewatchers.adapter.web;
 
-import com.roommate.snakewatchers.domain.model.Equipment;
 import com.roommate.snakewatchers.domain.DTO.RoomDTO;
 import com.roommate.snakewatchers.domain.DTO.WorkPlaceDTO;
+import com.roommate.snakewatchers.domain.model.Equipment;
 
 import java.util.List;
 import java.util.Set;
@@ -25,4 +25,6 @@ public interface RoomService {
     List<RoomDTO> getFilteredRoomsWithWorkPlaces(Set<Equipment> equipments);
 
     List<WorkPlaceDTO> findFilteredWorkPlaces(Set<Equipment> equipments, Long roomId);
+
+    List<WorkPlaceDTO> getWorkPlaceByEq(Long roomID, Set<Equipment> equipments);
 }

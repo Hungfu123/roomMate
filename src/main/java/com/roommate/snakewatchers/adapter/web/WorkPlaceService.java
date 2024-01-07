@@ -1,8 +1,8 @@
 package com.roommate.snakewatchers.adapter.web;
 
 
-import com.roommate.snakewatchers.domain.model.Equipment;
 import com.roommate.snakewatchers.domain.DTO.WorkPlaceDTO;
+import com.roommate.snakewatchers.domain.model.Equipment;
 
 import java.util.List;
 import java.util.Set;
