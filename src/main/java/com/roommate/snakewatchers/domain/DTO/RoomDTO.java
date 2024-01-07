@@ -14,10 +14,7 @@ public class RoomDTO {
     private String roomName;
     private List<WorkPlaceDTO> workPlaces;
 
-//    public RoomDTO() {
-//        this.roomID = generateRandomLongId();
-//        this.workPlaces = new ArrayList<>();
-//    }
+
 
     public String getRoomName() {
         return roomName;

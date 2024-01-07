@@ -16,11 +16,12 @@ import static com.roommate.snakewatchers.adapter.web.utils.RandomId.generateRand
 public class WorkPlaceDTO {
 
     private Long id;
+
     private Set<Equipment> equipments;
 
     public void addEquipment(Equipment equipment) {
-    equipments.add(equipment);
-}
+        equipments.add(equipment);
+    }
 
     @Override
     public String toString() {

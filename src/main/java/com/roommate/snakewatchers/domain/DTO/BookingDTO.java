@@ -26,6 +26,7 @@ public class BookingDTO {
     private Long userId;
 
 
+
     @NotNull(message = "Geben Sie bitte ihren Startdatum an!")
     @FutureOrPresent(message = "Startzeitdatum muss in der Gegenwart oder Zukunft liegen.")
     private LocalDateTime dateTimeFrom;
@@ -34,27 +35,13 @@ public class BookingDTO {
     @Future(message = "Endzeitdatum muss in der Zukunft liegen.")
     private LocalDateTime dateTimeTo;
 
-    @NotEmpty(message = "Wählen Sie bitte mindestens ein Equipment aus!")
+    //    @NotEmpty(message = "Wählen Sie bitte mindestens ein Equipment aus!")
     private Set<Equipment> equipments;
 
     private String userName;
     public void addEquipment(Set<Equipment> eq) {
         equipments.addAll(eq);
     }
-
-    // Weil noch keine Datenbank haben, nutzen wir die selbsterstellte Klasse RandomID die uns einfach Ids generiert, wenn wir eine Buchung bestätigen
-//    public BookingDTO() {
-//        this.bookingID = generateRandomLongId();
-//        this.workplaceId = null;
-//        this.roomId = null;
-//        this.roomName = null;
-//        this.userId = userId;
-//        this.dateTimeFrom = dateTimeFrom;
-//        this.dateTimeTo = dateTimeTo;
-//        this.equipments = equipments;
-//
-//    }
-
 
 
     @Override
