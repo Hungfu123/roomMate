@@ -9,18 +9,27 @@ create table work_place (
                             room_key integer,
                             equipment varchar(500)[]
 );
+create table user_profile(
+                             id serial primary key,
+                             username varchar(500)
+);
 
 create table booking (
                          booking_ID serial primary key,
                          user_Name varchar(100),
                          room_Id int,
                          workplace_id int references work_place(id),
+                         user_profile int references user_profile(id),
+                         user_profile_key integer,
                          room_name varchar(100),
                          date_Time_From TIMESTAMP,
                          date_Time_To TIMESTAMP,
                          equipments varchar(500)[]
 
 );
+
+
+
 
 -- Raum hinzufügen
 INSERT INTO room (name) VALUES ('Python');
