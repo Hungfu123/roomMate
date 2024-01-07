@@ -8,8 +8,8 @@ spring:
       client:
         registration:
           github:
-            client-id: ${CLIENT_ID}
-            client-secret: ${CLIENT_SECRET}
+            client-id: Iv1.4dc86ada8cc098dd
+            client-secret: 54d17600c05c78e1252a1fec774aa45047d736dc
           google:
             client-id: 984101475640-nonv4lo31flmmg0nk9iejj24v26nqc1l.apps.googleusercontent.com
             client-secret: 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
