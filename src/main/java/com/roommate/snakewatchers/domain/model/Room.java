@@ -18,16 +18,7 @@ public class Room {
     private String name;
     private List<WorkPlace> workPlaces;
 
-//    public Room() {
-//        this.roomID = generateRandomLongId();
-//        this.workPlaces = new ArrayList<>();
-//    }
-//    @PersistenceCreator
-//    public Room(Long id, String name, List<WorkPlace >workPlaces) {
-//        this.id = id;
-//        this.name = name;
-//        this.workPlaces = workPlaces;
-//    }
+
 
     public String getName() {
         return name;

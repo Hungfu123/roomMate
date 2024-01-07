@@ -13,14 +13,10 @@ import java.util.Set;
 public class WorkPlace {
     @Id
     private Long id;
-//    private Long roomId;
+    //    private Long roomId;
     private Set<Equipment> equipment;
 
-//    public WorkPlace() {
-//        this.id = generateRandomLongId();
-//        this.roomId = roomId;
-//        this.equipments = generateRandomEquipments();
-//    }
+
 
 
     @Override
