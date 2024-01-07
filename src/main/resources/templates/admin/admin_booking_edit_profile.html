@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<div th:replace="~{admin/header :: header}"></div>
+<body>
+<div th:replace="~{admin/header :: navbar}"></div>
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
+    <h1> Buchungsnummer <u th:text="${bookingDTO.bookingID}"></u></h1>
+
+    <div class="row col-md-6">
+        <div th:if="${successMessage}" class="alert alert-success text-center" role="alert">
+            <span th:text="${successMessage}"></span>
+        </div>
+        <section class="mt-5">
+            <a th:href="@{/admin/management}">Zur Übersicht</a>
+        </section>
+        <form th:action="@{/admin/management/{bookingId}/edit(bookingId=${bookingDTO.bookingID})}" method="post"
+              style="margin-top: 50px; border: 1px solid lightgray; padding: 40px 60px;">
+            <div class="form-group">
+                <label for="dateTimeFrom">Von</label>
+                <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
+                <input type="text" class="form-control datetimepicker" id="dateTimeFrom" name="dateTimeFrom" th:field="*{bookingDTO.dateTimeFrom}">
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.dateTimeFrom')}"
+                       th:errors="${bookingDTO.dateTimeFrom}"></small>
+            </div>
+            <div class="form-group">
+                <label for="dateTimeTo">Bis</label>
+                <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
+                <input type="text" class="form-control datetimepicker" id="dateTimeTo" name="dateTimeTo" th:field="*{bookingDTO.dateTimeTo}">
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO.dateTimeTo')}"
+                       th:errors="${bookingDTO.dateTimeTo}"></small>
+                <small class="text-danger" th:if="${#fields.hasErrors('bookingDTO')}"
+                       th:errors="${bookingDTO}"></small>
+            </div>
+            <br> <br>
+            <div th:each="item : ${equipments}">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="equipment-${item}" name="equipments" th:value="${item}" th:field="*{bookingDTO.equipments}">
+                    <label class="form-check-label" for="equipment-${item}" th:text="${item.displayName}">Tastatur</label>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="d-grid gap-2">
+                <button type="submit" name="addWorkPlace" value="true" class="btn btn-secondary">Speichern
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<!-- Hier füge das <script>-Element mit dem DateTimePicker-JavaScript-Code ein -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('.datetimepicker', {
+            enableTime: true,
+            dateFormat: 'd.m.Y H:i',
+            minuteIncrement: 15,
+        });
+    });
+</script>
+</body>
+</html>
