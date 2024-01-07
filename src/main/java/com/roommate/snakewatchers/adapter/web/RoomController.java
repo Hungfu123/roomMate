@@ -28,8 +28,9 @@ public class RoomController {
 
     @GetMapping("/room/{roomId}")
     public String roomDetail_viewWorkPlaces(Model model, @PathVariable("roomId") Long roomId){
-        model.addAttribute("maybeRoom", roomService.getRoom(roomId));
         List<WorkPlaceDTO> workPlaces = roomService.getWorkPlacesByRoomId(roomId);
+
+        model.addAttribute("maybeRoom", roomService.getRoom(roomId));
         model.addAttribute("workPlaces", workPlaces);
         return "admin/admin_room_details";
     }
@@ -49,7 +50,6 @@ public class RoomController {
     @PostMapping("/admin/room/{roomId}/addworkplace")
     public RedirectView addWorkPlace(@ModelAttribute WorkPlaceDTO workplace, @RequestParam boolean addWorkPlace, @PathVariable("roomId") Long roomId){
         if(addWorkPlace) {
-            //TODO: Room room = roomService.getRoom(roomId)
             workPlaceService.addWorkSpace(roomId,workplace);
         }
         return new RedirectView("/room/"+roomId);
@@ -103,7 +103,7 @@ public class RoomController {
         model.addAttribute("workplace", workPlace);
         model.addAttribute("equipments", equipments);
 
-//        equipment.add(equipmentName);
+
         return "redirect:/admin/"+workplaceId;
     }
 
