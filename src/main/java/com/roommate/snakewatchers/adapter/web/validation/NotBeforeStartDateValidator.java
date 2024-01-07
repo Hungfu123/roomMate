@@ -1,9 +1,9 @@
 package com.roommate.snakewatchers.adapter.web.validation;
 
 import com.roommate.snakewatchers.domain.DTO.BookingDTO;
-
 import com.roommate.snakewatchers.domain.DTO.NotBeforeStartDate;
-import jakarta.validation.*;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class NotBeforeStartDateValidator implements ConstraintValidator<NotBeforeStartDate, BookingDTO> {
     @Override

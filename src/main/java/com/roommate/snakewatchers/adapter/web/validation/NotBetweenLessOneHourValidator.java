@@ -1,9 +1,9 @@
 package com.roommate.snakewatchers.adapter.web.validation;
 
 import com.roommate.snakewatchers.domain.DTO.BookingDTO;
-
 import com.roommate.snakewatchers.domain.DTO.NotBetweenLessOneHour;
-import jakarta.validation.*;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 import java.time.Duration;
 
