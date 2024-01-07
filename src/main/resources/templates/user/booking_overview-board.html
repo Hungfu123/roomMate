@@ -4,43 +4,51 @@
 <body>
 <div th:replace="~{user/header :: navbar}"></div>
 <br>
-<div class="container mt-4">
-    <div class="row">
+<div class="container pt-3">
+    <h1 class="text-center">
+        Meine Reservierungen
+    </h1>
+    <p class="lead text-center">
+        Beobachten Sie hier ihre Buchungen
+    </p>
 
-        <!-- Loop durch die Buchungen und erstelle eine Karte für jede Buchung -->
-        <div th:each="booking, bookingStat : ${bookings}" class="col-md-6 mb-4">
-            <div class="card text-dark bg-light mb-3">
-                <div class="card-header">
-                    <h5 class="card-title"><strong>ID: <span th:text="${booking.bookingID}"></span> Buchung</strong></h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Raum ID:</strong> <span th:text="${booking.roomId}"></span></p>
-                            <p><strong>Raum Name:</strong> <span th:text="${booking.roomName}"></span></p>
-                            <p><strong>Arbeitsplatz ID:</strong> <span th:text="${booking.getWorkplaceId}"></span></p>
-                            <p><strong>Ausstattungen:</strong> <span th:text="${booking.equipments}"></span></p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Benutzer:</strong> <span th:text="${booking.userName}"></span></p>
-                            <p><strong>Von:</strong> <span th:text="${{booking.dateTimeFrom}}"></span></p>
-                            <p><strong>Bis:</strong> <span th:text="${{booking.dateTimeTo}}"></span></p>
-                        </div>
+    <section class="mt-5">
+        <a href="/">Zur Übersicht</a>
+    </section>
+    <br>
+
+    <!-- Loop durch die Buchungen und erstelle eine Karte für jede Buchung -->
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div th:each="booking, bookingStat : ${bookings}" class="col">
+            <div class="card card  border-dark mb-3 h-100" >
+                <div class="card-header"><strong>Buchung-ID: <span th:text="${booking.bookingID}"></span> </strong></div>
+                <div class="card-body row">
+                    <h7 class="card-title"> <strong>Benutzer:</strong> <span th:text="${booking.userName}"></span></h7>
+                    <div class="col-md-6">
+
+                        <p><strong>Raum ID:</strong> <span th:text="${booking.roomId}"></span></p>
+                        <p><strong>Raum Name:</strong> <span th:text="${booking.roomName}"></span></p>
+                        <p><strong>Arbeitsplatz ID:</strong> <span th:text="${booking.getWorkplaceId}"></span></p>
                     </div>
+                    <div class="col-md-6">
+                        <p><strong>Von:</strong> <span th:text="${{booking.dateTimeFrom}}"></span></p>
+                        <p><strong>Bis:</strong> <span th:text="${{booking.dateTimeTo}}"></span></p>
+                    </div>
+                    <strong>Ausstattungen:</strong> <span th:text="${booking.equipments}"></span>
+
                 </div>
 
                 <div class="card-footer">
                     <form method="post" th:action="@{/booking/mybookings/delete}">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" th:data-bs-target="'#exampleModal-' + ${booking.bookingID}">
-                        Löschen
-                        <input type="hidden" th:name="bookingId" th:value="${booking.bookingID}"/>
-                    </button>
-                    <div th:replace="~{user/booking_modal_delete :: modalDelete(bookingId=${booking.bookingID})}"></div>
-                        </form>
+                            Löschen
+                            <input type="hidden" th:name="bookingId" th:value="${booking.bookingID}"/>
+                        </button>
+                        <div th:replace="~{user/booking_modal_delete :: modalDelete(bookingId=${booking.bookingID})}"></div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
