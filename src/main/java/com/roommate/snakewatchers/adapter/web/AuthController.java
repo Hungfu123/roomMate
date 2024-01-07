@@ -10,16 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AuthController {
 
 
-    //Handler Methode: User Login REQUEST
+    //Handler Methode: UserProfile Login REQUEST
     @GetMapping("/login")
     public String loginPage(Model model, @AuthenticationPrincipal OAuth2User oAuth2User){
-        model.addAttribute("user", oAuth2User != null ? oAuth2User.getAttribute("login"): null);
+        String username =  oAuth2User != null ? oAuth2User.getAttribute("login"): null;
+
+        model.addAttribute("user",username);
+
         return "login";
     }
 
-//    @GetMapping("/register")
-//    public String showRegistrationForm(Model model, RegistrationDto user){
-//        model.addAttribute("user", user);
-//        return "register";
-//    }
 }
