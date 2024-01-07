@@ -39,19 +39,10 @@ Jeder User sieht nur seine eigenen Buchungen.
 - Thymeleaf, CSS Bootstrap, HTML
 
 ## Installation
-Achtung: Vorher eigenen Oauth App in Github erstellen um CLIENT_ID und CLIENT_SECRET in die Umgebung einzutragen
-rstelle im Projektverzeichnis eine .env Datei mit folgenden Inhalt:
-
-    
-    CLIENT_ID= `deine CLient ID`
-    CLIENT_SECRET= `deine Client Secret`
-    POSTGRES_DB=roommate
-    POSTGRES_USER=roommate
-    POSTGRES_PASSWORD=roommate123
 
 1. Klone das Repository: `git clone https://github.com/dein-username/roommate.git`
 2. Wechsle in das Projektverzeichnis: `cd roommate`
 3. Starten Sie die `docker-compose.yaml` damit der Container geöffnet ist.
-4. Verbinden Sie sich mit der Datenbank und melden sie sich mit der `application.yaml` an um Datenbankzugriff zu haben
+4. Verbinden Sie sich mit der Datenbank und nutzen Sie die Daten von `application.yaml` um Datenbankzugriff zu bekommen
 
 5. Führe die Anwendung mit Gradle aus: `./gradlew bootRun`
