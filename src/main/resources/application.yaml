@@ -10,12 +10,9 @@ spring:
           github:
             client-id: ${CLIENT_ID}
             client-secret: ${CLIENT_SECRET}
-#            scope: read:public_repo
-
-  user:
-    name: test
-    password: test123
-    roles: ADMIN
+          google:
+            client-id: 984101475640-nonv4lo31flmmg0nk9iejj24v26nqc1l.apps.googleusercontent.com
+            client-secret: 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
 
 logging:
   level:
@@ -25,5 +22,5 @@ logging:
 
 roommate:
     rollen:
-      admin: Hungfu123, YungTeto, test
+      admin: Hungfu123, YungTeto
 
