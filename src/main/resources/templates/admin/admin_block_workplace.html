@@ -4,21 +4,14 @@
 <body>
 <div th:replace="~{admin/header :: navbar}"></div>
 <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
-    <h1>Arbeitsplatz hinzufügen</h1>
+    <h1>Arbeitsplatz blockieren</h1>
 
     <div class="row col-md-6 ">
-        <!--        <section class="mt-5">-->
-        <!--            <a th:href="@{/room/{roomId}(roomId=${roomId})}">Zur Raum Übersicht</a>-->
-        <!--        </section>-->
-
-        <form th:action="@{/admin/room/{roomId}/addworkplace(roomId=${roomId})}" method="post"
+        <section class="mt-5">
+            <a th:href="@{/room/{roomId}(roomId=*{roomId})}">Zur Übersicht</a>
+        </section>
+        <form th:action="@{/admin/room/{workplaceId}/blockworkplace(workplaceId=${workplaceId})}" method="post"
               style="margin-top: 50px; border: 1px solid lightgray; padding: 40px 60px;">
-            <div class="form-group">
-                <label for="workPlaceName">Arbeitsplatz Name</label>
-                <input type="workPlaceName" class="form-control" id="workPlaceName" name="workPlaceName"
-                       placeholder="Namen eingeben">
-                <!--      <small class="form-text text-danger" th:if="${#fields.hasErrors('raumbuchung.datum')}" th:errors="*{raumbuchung.datum}">Ungültige Startzeit.</small>-->
-            </div>
             <div class="form-group">
                 <label for="dateTimeFrom">Von</label>
                 <!-- Schrittweite von 900 Sekunden = 15 Minuten -->
@@ -38,12 +31,60 @@
             <br>
             <br>
             <div class="d-grid gap-2">
-                <button type="submit" name="addWorkPlace" value="true" class="btn btn-secondary">Platz hinzufügen
+                <button type="submit" name="addWorkPlace" value="true" class="btn btn-secondary">Platz blockieren
                 </button>
             </div>
         </form>
     </div>
-</div>
+    <br> <br> <br>
+    <div  style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;" th:if="${bookings}">
+        <h2>Übersicht von geblocktem Platz <u><span th:text="${workplaceId}"> </span></u></h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Raum</th>
+                <th>Raum Name</th>
+                <th>Zeitraum</th>
+                <th>Aktionen</th>
 
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.bookingID}"></td>
+                <td th:text="${booking.userName}" ></td>
+                <td th:text="${booking.roomId}"></td>
+                <td th:text="${booking.roomName}"></td>
+                <td>
+                    <span th:text="${{booking.dateTimeFrom}}"></span>
+                    -
+                    <span th:text="${{booking.dateTimeTo}}"></span>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <form method="post" th:action="@{/admin/room/{workplaceId}/{bookingId}/releasebooking(workplaceId=${workplaceId}, bookingId=${booking.bookingID})}">
+                            <input class="btn btn-outline-dark btn-sm" type="submit" value="Freigeben">
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+<!-- Hier füge das <script>-Element mit dem DateTimePicker-JavaScript-Code ein -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr('.datetimepicker', {
+            enableTime: true,
+            dateFormat: 'd.m.Y H:i',
+            minuteIncrement: 15,
+        });
+    });
+</script>
 </body>
 </html>
