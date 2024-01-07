@@ -54,4 +54,13 @@ public class BookingRepositoryImpl implements BookingRepository {
     //TODO: Wenn BuchungsDatum über aktuellen Datum ist, dann "vergangene Buchungen"
     // TODO: die nächsten Buchungen
     // TODO: BReadcrumb Menü: die nächste Auswahl wird angezeigt
+
+
+    @Override
+    public List<BookingDTO> findByUserName(String name) {
+        List<Booking> bookings = repository.findByUserName(name);
+        return bookings.stream()
+                .map(BookingMapper::mapToBookingDTO)
+                .toList();
+    }
 }
