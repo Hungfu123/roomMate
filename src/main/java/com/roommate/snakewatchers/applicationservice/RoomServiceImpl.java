@@ -11,10 +11,12 @@ import java.util.Set;
 @Service
 public class RoomServiceImpl implements RoomService {
 
-    RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
+    private final WorkPlaceRepository workPlaceRepository;
 
-    public RoomServiceImpl(RoomRepository roomRepository) {
+    public RoomServiceImpl(RoomRepository roomRepository, WorkPlaceRepository workPlaceRepository) {
         this.roomRepository = roomRepository;
+        this.workPlaceRepository = workPlaceRepository;
     }
 
     @Override
@@ -51,6 +53,18 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<WorkPlaceDTO> findFilteredWorkPlaces(Set<Equipment> equipments, Long roomId) {
         return roomRepository.findFilteredWorkPlacesRoom(equipments, roomId);
+    }
+
+    @Override
+    public List<WorkPlaceDTO> getWorkPlaceByEq(Long roomID, Set<Equipment> eq) {
+        List<WorkPlaceDTO> workplaces;
+
+        if (eq == null) {
+            workplaces = workPlaceRepository.findAll().stream().toList();
+        } else {
+            workplaces = findFilteredWorkPlaces(eq, roomID);
+        }
+        return workplaces;
     }
 
 
