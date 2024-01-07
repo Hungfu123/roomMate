@@ -60,12 +60,10 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
     public List<WorkPlaceDTO> getAllWorkPlaces() {
         return workRepository.findAll().stream().toList();
     }
-
     @Override
     public WorkPlaceDTO getWorkPlaceById(Long workplaceId) {
         return workRepository.findById(workplaceId);
     }
-
 
     @Override
     public Set<Equipment> deleteEqFromWorkPlace(String equipmentName, WorkPlaceDTO workPlace) {

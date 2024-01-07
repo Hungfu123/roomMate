@@ -14,4 +14,6 @@ public interface BookingRepository {
     BookingDTO findById(Long bookingId) throws NoSuchElementException;
 
     void deleteById(Long bookingId);
+
+    List<BookingDTO> findByUserName(String name);
 }
