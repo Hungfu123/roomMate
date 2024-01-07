@@ -1,9 +1,9 @@
 package com.roommate.snakewatchers.adapter.db;
 
 import com.roommate.snakewatchers.applicationservice.RoomRepository;
-import com.roommate.snakewatchers.domain.model.Equipment;
 import com.roommate.snakewatchers.domain.DTO.RoomDTO;
 import com.roommate.snakewatchers.domain.DTO.WorkPlaceDTO;
+import com.roommate.snakewatchers.domain.model.Equipment;
 import com.roommate.snakewatchers.domain.model.Room;
 import com.roommate.snakewatchers.mapper.RoomMapper;
 import org.springframework.stereotype.Repository;

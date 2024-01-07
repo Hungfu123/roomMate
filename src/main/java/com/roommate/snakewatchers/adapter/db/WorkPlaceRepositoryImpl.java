@@ -1,7 +1,6 @@
 package com.roommate.snakewatchers.adapter.db;
 
 import com.roommate.snakewatchers.applicationservice.WorkPlaceRepository;
-import com.roommate.snakewatchers.domain.DTO.RoomDTO;
 import com.roommate.snakewatchers.domain.DTO.WorkPlaceDTO;
 import com.roommate.snakewatchers.domain.model.WorkPlace;
 import com.roommate.snakewatchers.mapper.WorkPlaceMapper;
@@ -10,8 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 public class WorkPlaceRepositoryImpl implements WorkPlaceRepository {
