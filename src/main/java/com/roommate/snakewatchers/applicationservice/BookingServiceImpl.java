@@ -2,8 +2,12 @@ package com.roommate.snakewatchers.applicationservice;
 
 import com.roommate.snakewatchers.adapter.web.BookingService;
 import com.roommate.snakewatchers.domain.DTO.BookingDTO;
+import com.roommate.snakewatchers.domain.DTO.RoomDTO;
+import com.roommate.snakewatchers.domain.DTO.UserDTO;
 import com.roommate.snakewatchers.domain.DTO.WorkPlaceDTO;
+import com.roommate.snakewatchers.domain.model.Booking;
 import com.roommate.snakewatchers.domain.model.Equipment;
+import com.roommate.snakewatchers.domain.model.WorkPlace;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,11 +19,15 @@ import java.util.Set;
 public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
 
-    private final WorkPlaceRepository workPlaceRepository;
+    private final RoomRepository roomRepository;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, WorkPlaceRepository workPlaceRepository) {
+    private final UserRepository userRepository;
+
+    public BookingServiceImpl(BookingRepository bookingRepository, RoomRepository roomRepository, UserRepository userRepository) {
         this.bookingRepository = bookingRepository;
-        this.workPlaceRepository = workPlaceRepository;
+        this.roomRepository = roomRepository;
+
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -39,6 +47,7 @@ public class BookingServiceImpl implements BookingService {
         for (WorkPlaceDTO workplace : workplaces) {
             boolean isAvailable = isWorkplaceAvailable(workplace.getId(), booking.getDateTimeFrom(), booking.getDateTimeTo());
             workplaceAvailabilityList.add(isAvailable);
+
         }
         return workplaceAvailabilityList;
     }
@@ -57,7 +66,7 @@ public class BookingServiceImpl implements BookingService {
         booking.addEquipment(equipments);
 
 
-        return bookingRepository.save(booking);
+        return booking;
     }
 
     public boolean isWorkplaceAvailable(Long workplaceId, LocalDateTime dateTimeFrom, LocalDateTime dateTimeTo) {
@@ -72,23 +81,43 @@ public class BookingServiceImpl implements BookingService {
 
         return true; // Arbeitsplatz ist verfügbar
     }
+    @Override
+    public List<BookingDTO> findBookingsByWorkPlaceId(Long workplaceId, BookingDTO bookingDTO) {
+        List<BookingDTO> booklist = bookingRepository.findAll();
 
-    public List<Boolean> getAvaiableWorkPlacesOnly(BookingDTO booking, List<WorkPlaceDTO> workplaces) {
-        List<Boolean> workplaceAvailabilityList = new ArrayList<>();
-        for (WorkPlaceDTO workplace : workplaces) {
-            boolean isAvailable = isWorkplaceAvailable(workplace.getId(), booking.getDateTimeFrom(), booking.getDateTimeTo());
-            workplaceAvailabilityList.add(isAvailable);
-        }
-        return workplaceAvailabilityList;
+        return booklist.stream()
+                .filter(b -> b.getWorkplaceId().equals(workplaceId))
+                .toList();
     }
-//    public List<Boolean> getAvaiableWorkPlacesOnlyTest() {
-//        List<WorkPlaceDTO> workplaces = workPlaceRepository.findAll().stream().toList();
+//TODO: UserProfile erstellen und die Methode ungefähr so anpassen dass UserProfile eine Liste von Bookings hat.
+//    public List<BookingDTO> findBookingsByUser() {
+//        String username = get();
+//        UserProfile createdBy = userRepository.findByUser_Name();
+//        Long userId = createdBy.getId();
+//        List<BookingDTO> bookingsByUser = bookingRepository.findBookingByUser(userId);
+//        return bookingsByUser.stream().toList();
 //
-//        List<Boolean> workplaceAvailabilityList = new ArrayList<>();
-//        for (WorkPlaceDTO workplace : workplaces) {
-//            boolean isAvailable = isWorkplaceAvailable(workplace.getId(), booking.getDateTimeFrom(), booking.getDateTimeTo());
-//            workplaceAvailabilityList.add(isAvailable);
-//        }
-//        return workplaceAvailabilityList;
+//
 //    }
+
+    @Override
+    public BookingDTO findById(Long bookingId) {
+
+        return bookingRepository.findById(bookingId);
+    }
+
+    @Override
+    public List<BookingDTO> findByUserName(String name) {
+        UserDTO user = userRepository.findbyName(name);
+        List<BookingDTO> bookingsByUser = bookingRepository.findByUserName(user.getUsername());
+
+        return bookingsByUser;
+    }
+
+    @Override
+    public void updateBookingWithRoom(Long roomID, BookingDTO booking) {
+        RoomDTO room =roomRepository.findById(roomID);
+        booking.setRoomId(roomID);
+        booking.setRoomName(room.getRoomName());
+    }
 }
