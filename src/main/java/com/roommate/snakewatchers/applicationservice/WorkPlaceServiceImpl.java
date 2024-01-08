@@ -19,7 +19,7 @@ public class WorkPlaceServiceImpl implements WorkPlaceService {
     private WorkPlaceRepository workRepository;
     private RoomRepository roomRepository;
 
-    public WorkPlaceServiceImpl(WorkPlaceRepositoryImpl workRepository, RoomRepositoryImpl roomRepository) {
+    public WorkPlaceServiceImpl(WorkPlaceRepository workRepository, RoomRepository roomRepository) {
         this.workRepository = workRepository;
         this.roomRepository = roomRepository;
     }
