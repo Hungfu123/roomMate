@@ -13,7 +13,7 @@ create table user_profile(
                              id serial primary key,
                              username varchar(500)
 );
-
+--Buchungen
 create table booking (
                          booking_ID serial primary key,
                          user_Name varchar(100),
