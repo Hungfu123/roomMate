@@ -25,7 +25,7 @@ Jeder User sieht nur seine eigenen Buchungen.
 
 
 ## Status: ONGOING
-  - Weitere Tests schreiben mit Builder Pattern
+  - Weitere Tests schreiben mit Builder Pattern.
 
 ## Technologie Stack
 
